@@ -1,25 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import { TabStrip, TabStripTab } from '@progress/kendo-react-layout';
+import { Panel } from './components/Panel';
+
+const SELECTED_KEY = 'selected';
+
+const regions = [
+  'All Regions', 'North', 'East', 'South', 'West'
+];
+
 function App() {
+  const [selected, setSelected] = React.useState(
+    parseInt(localStorage.getItem(SELECTED_KEY), 10) || 0
+  );
+
+  const onTabSelect = (e) => {
+    setSelected(e.selected);
+    localStorage.setItem(SELECTED_KEY, e.selected);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>
+        <span role="img" aria-label="">🍕</span>
+        Pizza-o-matic
+        <span role="img" aria-label="">🍕</span>
+      </h1>
+
+      <TabStrip
+        selected={selected}
+        onSelect={onTabSelect}
+        tabPosition="left"
+      >
+        {regions.map(region => (
+          <TabStripTab title={region} key={region}>
+            <Panel region={region} />
+          </TabStripTab>
+        ))}
+      </TabStrip>
+    </>
   );
 }
 
