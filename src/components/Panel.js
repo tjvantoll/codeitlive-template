@@ -22,8 +22,6 @@ export function Panel({ region }) {
     'Customer Rating', 'Staff Satisfaction Rating', 'Sales Rating', 'Cleanliness Rating'
   ];
 
-  console.log("Why is this rendered three times?");
-
   return (
     <>
       <Chart>

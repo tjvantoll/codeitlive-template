@@ -32,6 +32,7 @@ function App() {
         selected={selected}
         onSelect={onTabSelect}
         tabPosition="left"
+        animation={false}
       >
         {regions.map(region => (
           <TabStripTab title={region} key={region}>
